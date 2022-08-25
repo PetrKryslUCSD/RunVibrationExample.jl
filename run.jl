@@ -13,7 +13,7 @@ file = matopen(meshfilebase * ".mat", "r")
 Omega = read(file, "Omega")
 close(file)
 
-@gp sqrt.(abs.(Omega)) ./ (2*pi) "lw 3 title '$(parameterfile)'" :-
+@gp 1:length(Omega) sqrt.(abs.(Omega)) ./ (2*pi) "lw 3 title '$(parameterfile)'" :-
 @gp  :- "set grid"  :-
 @gp  :- "set xlabel 'Frequency SN [ND]'" :-
 @gp  :- "set ylabel 'Frequency [Hz]'"
