@@ -3,7 +3,7 @@ Pkg.activate("."); Pkg.instantiate()
 using Revise
 using FinEtoolsMultimaterialVibEP: solve_ep
 using MAT
-using Gnuplot
+using PlotlyLight
 
 parameterfile = "twoblocks.json"
 solve_ep(parameterfile)
@@ -13,7 +13,11 @@ file = matopen(meshfilebase * ".mat", "r")
 Omega = read(file, "Omega")
 close(file)
 
-@gp 1:length(Omega) sqrt.(abs.(Omega)) ./ (2*pi) "lw 3 title '$(parameterfile)'" :-
-@gp  :- "set grid"  :-
-@gp  :- "set xlabel 'Frequency SN [ND]'" :-
-@gp  :- "set ylabel 'Frequency [Hz]'"
+pl = PlotlyLight.Plot()
+pl(x = collect(1:length(Omega)), y = sqrt.(abs.(Omega)) ./ (2*pi), mode="lines+markers")
+pl.layout.title.text = "Natural frequencies"
+pl.layout.xaxis.title = "Frequency SN [ND]"
+pl.layout.yaxis.title = "Frequency [Hz]"
+
+display(pl)
+

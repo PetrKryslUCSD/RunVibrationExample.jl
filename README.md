@@ -2,6 +2,9 @@
 
 Summary: Find the solution of the free vibration problem for multimaterial domains created in Comsol.
 
+
+*Please run with Julia 1.9.0 and above.*
+
 ## Run the simulation
 
 Make sure your working directory is the folder  `RunVibrationExample` as set up  by the cloning of this repository.
